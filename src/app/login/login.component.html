@@ -1,0 +1,90 @@
+
+
+<p class="tip">Click on button in image container</p>
+<div class="cont">
+  <div class="form sign-in">
+    <h2>Welcome back</h2>
+    <label>
+      <span>Email</span>
+      <input type="email" name="email" [(ngModel)]="model.email"/>
+    </label>
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" [(ngModel)]="model.password"/>
+    </label>
+    <p class="forgot-pass">Forgot password?</p>
+    <button type="button" class="submit" (click)="onClick('signin')">Sign In</button>
+    <!-- <button type="button" class="fb-btn">Connect with <span>facebook</span></button> -->
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+
+    <div class="form sign-up" style="width:500px;padding-left:125px">
+      <h2>Time to feel like home</h2>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">          
+      <label for="name">
+        <span>Email</span>
+      </label>
+        <input type="email" name="email"  id="emailaddress" required
+        [(ngModel)]="model.email"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+        #email="ngModel">
+        <div [hidden]="email.valid || email.pristine"
+        class="alert alert-danger">
+        <div [hidden]="!email.hasError('required')">Email is required</div>
+        <div [hidden]="!email.hasError('pattern')">Email format should be 
+           <small><b>joe@abc.com</b></small>
+        </div>
+     </div>
+
+     
+      <label for="name">
+          <span>Password</span>
+      </label>
+          <input type="password" name="password" id="password" required [(ngModel)]="model.password"
+          #password="ngModel"/>
+          <div [hidden]="password.valid || password.pristine"
+          class="alert alert-danger">
+       Password is required
+     </div> 
+      <label for="name">
+        <span>Re-Type Password</span>
+      </label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required
+        validateEqual="password"
+        [(ngModel)]="model.confirmPassword" name="confirmPassword"
+        #confirmPassword="ngModel"/>
+        <div [hidden]="confirmPassword.valid || confirmPassword.pristine"
+        class="alert alert-danger">
+        Passwords did not match
+   </div>
+      <button type="submit" class="submit" [disabled]="!loginForm.form.valid">Sign Up</button>
+      </form>
+  </div>
+  
+  <table class="table" [hidden]="!submitted">
+      <tr>
+          <td><label>Email</label></td>
+          <td>{{model.email}}</td>
+        </tr>
+        <tr>
+            <td><label>Password</label></td>
+            <td>{{model.password}}</td>
+          </tr>
+      </table>
+  </div>
+
+<!-- <script  src="/assets/js/index.js"></script> -->
